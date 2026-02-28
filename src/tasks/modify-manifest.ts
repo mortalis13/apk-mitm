@@ -42,8 +42,11 @@ export default async function modifyManifest(
       }
     })
   }
+  
+  let result = xml.js2xml(document, { spaces: 4 })
+  result = result.replace('android:requiredSplitTypes=""', '').replace('android:splitTypes=""', '')
 
-  await fs.writeFile(path, xml.js2xml(document, { spaces: 4 }))
+  await fs.writeFile(path, result)
 
   return { usesAppBundle }
 }
